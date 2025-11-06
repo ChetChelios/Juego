@@ -1,0 +1,251 @@
+/* Reset y configuración básica */
+* { 
+    margin: 0; 
+    padding: 0; 
+    box-sizing: border-box; 
+}
+
+body { 
+    font-family: 'Courier New', monospace; 
+    overflow: hidden; 
+    background: #000; 
+}
+
+canvas { 
+    display: block; 
+}
+
+/* Mira central */
+.crosshair { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+    width: 30px; 
+    height: 30px; 
+    pointer-events: none; 
+    z-index: 100; 
+}
+
+.crosshair::before, 
+.crosshair::after { 
+    content: ''; 
+    position: absolute; 
+    background: #00ff00; 
+    box-shadow: 0 0 8px #00ff00; 
+}
+
+.crosshair::before { 
+    width: 20px; 
+    height: 2px; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+}
+
+.crosshair::after { 
+    width: 2px; 
+    height: 20px; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+}
+
+/* HUD (Interfaz de usuario) */
+.hud { 
+    position: absolute; 
+    top: 20px; 
+    left: 20px; 
+    color: #00ff00; 
+    font-size: 1.1em; 
+    z-index: 10; 
+    text-shadow: 0 0 6px #00ff00; 
+}
+
+.health-bar { 
+    width: 200px; 
+    height: 26px; 
+    background: rgba(0,0,0,0.8); 
+    border: 2px solid #00ff00; 
+    border-radius: 6px; 
+    overflow: hidden; 
+    position: relative; 
+}
+
+.health-fill { 
+    height: 100%; 
+    background: linear-gradient(90deg, #ff0000, #00ff00); 
+    width: 100%; 
+    transition: width 0.25s linear; 
+}
+
+.health-text { 
+    position: absolute; 
+    width: 100%; 
+    text-align: center; 
+    line-height: 26px; 
+    font-weight: bold; 
+    color: #fff; 
+}
+
+.ammo { 
+    font-size: 1.25em; 
+    font-weight: bold; 
+    margin-top: 8px; 
+}
+
+.weapon-info {
+    margin-top: 8px;
+    font-size: 0.9em;
+    color: #00ffff;
+}
+
+.weapon-selector {
+    position: absolute;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 15px;
+    z-index: 10;
+}
+
+.weapon-slot {
+    width: 80px;
+    height: 80px;
+    border: 3px solid #00ff00;
+    background: rgba(0, 0, 0, 0.7);
+    cursor: pointer;
+    transition: all 0.2s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    color: #00ff00;
+    font-weight: bold;
+    position: relative;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+}
+
+.weapon-slot:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 15px #00ff00;
+}
+
+.weapon-slot.active {
+    border-color: #00ffff;
+    background-color: rgba(0, 255, 255, 0.2);
+    box-shadow: 0 0 20px #00ffff;
+}
+
+.weapon-slot .weapon-key {
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    font-size: 0.8em;
+    color: #fff;
+    background: rgba(0,0,0,0.7);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.weapon-slot .weapon-name {
+    position: absolute;
+    bottom: 5px;
+    font-size: 0.65em;
+    background: rgba(0,0,0,0.8);
+    padding: 2px 6px;
+    border-radius: 3px;
+}
+
+.weapon-image {
+    position: absolute;
+    bottom: 80px;
+    right: 80px;
+    width: 400px;
+    height: 300px;
+    pointer-events: none;
+    z-index: 5;
+}
+
+.weapon-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 0 10px rgba(0,255,0,0.5));
+}
+
+.score { 
+    position: absolute; 
+    top: 20px; 
+    right: 20px; 
+    font-size: 1.2em; 
+    color: #00ff00; 
+    z-index: 10; 
+    text-shadow: 0 0 6px #00ff00; 
+}
+
+/* Pantallas de inicio y game over */
+.start-screen, 
+.game-over-screen { 
+    position: absolute; 
+    top: 0; 
+    left: 0; 
+    width: 100%; 
+    height: 100%; 
+    background: rgba(0,0,0,0.95); 
+    display: flex; 
+    align-items: center; 
+    justify-content: center; 
+    flex-direction: column; 
+    z-index: 1000; 
+}
+
+.start-btn { 
+    padding: 16px 40px; 
+    font-size: 1.4em; 
+    border: 3px solid #00ff00; 
+    background: transparent; 
+    color: #00ff00; 
+    cursor: pointer; 
+    transition: all 0.2s; 
+}
+
+.start-btn:hover { 
+    background: #00ff00; 
+    color: #000; 
+    transform: scale(1.05); 
+    box-shadow: 0 0 20px #00ff00; 
+}
+
+/* Indicador de daño recibido */
+.hit-indicator { 
+    position: absolute; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%,-50%); 
+    width: 60px; 
+    height: 60px; 
+    border: 4px solid #ff0000; 
+    border-radius: 50%; 
+    opacity: 0; 
+    pointer-events: none; 
+    z-index: 90; 
+}
+
+.hit-indicator.active { 
+    animation: hitPulse 0.28s ease-out; 
+}
+
+@keyframes hitPulse { 
+    0% { 
+        transform: translate(-50%,-50%) scale(0.5); 
+        opacity: 1; 
+    } 
+    100% { 
+        transform: translate(-50%,-50%) scale(1.6); 
+        opacity: 0; 
+    } 
+}

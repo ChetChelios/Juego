@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>⏰ TIME SHIFT - FPS 3D</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Pantalla de inicio -->
+    <div class="start-screen" id="startScreen">
+        <div style="color:#00ff00;font-size:4em;font-weight:bold;margin-bottom:12px;">⏰ TIME SHIFT</div>
+        <div style="color:#00ffff;margin-bottom:18px;text-align:center;max-width:700px;">EL TIEMPO SE RALENTIZA CUANDO NO TE MUEVES</div>
+        <button class="start-btn" id="startBtn">▶ INICIAR MISIÓN CARE MONDA</button>
+        <div style="margin-top:18px;color:#00ffff;">WASD - MOVER • MOUSE - MIRAR • CLICK - DISPARAR • SHIFT - CORRER • R - RECARGAR • 1,2,3 - CAMBIAR ARMA</div>
+    </div>
+
+    <!-- Pantalla de game over -->
+    <div class="game-over-screen" id="gameOverScreen" style="display:none;">
+        <div style="color:#ff0000;font-size:3em;font-weight:bold;margin-bottom:8px;">MISIÓN FALLIDA</div>
+        <div style="color:#00ff00;font-size:1.6em;margin-bottom:18px;" id="finalScore">PUNTUACIÓN: 0</div>
+        <button class="start-btn" id="restartBtn">↻ REINTENTAR</button>
+    </div>
+
+    <!-- Mira -->
+    <div class="crosshair"></div>
+    <div class="hit-indicator" id="hitIndicator"></div>
+
+    <!-- HUD del juego -->
+    <div class="hud">
+        <div class="health-bar">
+            <div class="health-fill" id="healthFill"></div>
+            <div class="health-text" id="healthText">100</div>
+        </div>
+        <div class="ammo" id="ammoDisplay">12 / 60</div>
+        <div class="weapon-info" id="weaponName">PISTOLA</div>
+        <div style="margin-top:8px;">OLEADA: <span id="waveNumber">1</span></div>
+        <div>ENEMIGOS: <span id="enemyCount">0</span></div>
+    </div>
+    <div class="score" id="score">PUNTOS: 0</div>
+
+    <!-- Imagen del arma actual -->
+    <div class="weapon-image" id="weaponImage">
+        <img id="currentWeaponImg" src="" alt="Arma actual">
+    </div>
+
+    <!-- Selector de armas -->
+    <div class="weapon-selector">
+        <div class="weapon-slot active" id="weapon-pistol" data-weapon="pistol">
+            <span class="weapon-key">1</span>
+            <div style="font-size:2em;">🔫</div>
+            <span class="weapon-name">PISTOLA</span>
+        </div>
+        <div class="weapon-slot" id="weapon-rifle" data-weapon="rifle">
+            <span class="weapon-key">2</span>
+            <div style="font-size:2em;">🎯</div>
+            <span class="weapon-name">RIFLE</span>
+        </div>
+        <div class="weapon-slot" id="weapon-shotgun" data-weapon="shotgun">
+            <span class="weapon-key">3</span>
+            <div style="font-size:2em;">💥</div>
+            <span class="weapon-name">ESCOPETA</span>
+        </div>
+    </div>
+
+    <!-- Scripts del juego -->
+    <script src="config.js"></script>
+    <script src="audio.js"></script>
+    <script src="environment.js"></script>
+    <script src="weapons.js"></script>
+    <script src="player.js"></script>
+    <script src="enemy.js"></script>
+    <script src="effects.js"></script>
+    <script src="game.js"></script>
+</body>
+</html>
